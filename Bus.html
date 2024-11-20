@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bus Booking Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("Buss.jpg"); /* Add your background image URL here */
+        background-size: cover; /* Ensures the image covers the entire page */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        background-position: center; /* Centers the image */
+        background-attachment: fixed; /* Keeps the image fixed when scrolling */
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Enhanced shadow for depth */
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+      }
+
+      .search-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .search-section label {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .search-section input,
+      .search-section select {
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white for input fields */
+        color: #000; /* Black text for readability */
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none; /* Removes default focus outline */
+        transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+      }
+
+      .search-section input:focus,
+      .search-section select:focus {
+        border: 1px solid #ff5a5f; /* Highlighted border color */
+        box-shadow: 0 0 8px rgba(255, 90, 95, 0.5); /* Light border glow */
+        background: rgba(255, 255, 255, 1); /* Fully opaque background on focus */
+      }
+
+      .search-section button {
+        background-color: #ff5a5f;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 90, 95, 0.3);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        padding: 12px 24px; /* Increase padding for a larger button */
+        font-size: 16px; /* Adjust font size */
+        border-radius: 6px; /* Optionally make the corners a bit rounder */
+      }
+
+      .search-section button:hover {
+        background-color: #e94e4e;
+      }
+
+      /* Back Arrow Button Styling */
+      .back-arrow {
+        margin-top: 20px;
+        font-size: 1.5em;
+        color: #fff;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .back-arrow:hover {
+        color: rgba(255, 90, 95, 0.7); /* Color on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Search Buses</h2>
+      <div class="search-section">
+        <label for="leavingfrom">Leaving From</label>
+        <input
+          type="text"
+          id="leavingfrom"
+          name="leavingfrom"
+          placeholder="Enter departure city"
+        />
+
+        <label for="goingto">Going To</label>
+        <input
+          type="text"
+          id="goingto"
+          name="goingto"
+          placeholder="Enter destination city"
+        />
+
+        <label for="traveldate">Travel Date</label>
+        <input type="date" id="traveldate" name="traveldate" />
+
+        <label for="busType">Bus Type</label>
+        <select id="busType" name="bustype">
+          <option value="General">General</option>
+          <option value="AC">AC</option>
+          <option value="Non-AC">Non-AC</option>
+          <option value="Sleeper">Sleeper</option>
+          <option value="Semi-Sleeper">Semi-Sleeper</option>
+        </select>
+        <button id="searchButton">Search Buses</button>
+
+        <!-- Back arrow button -->
+        <div class="back-arrow" onclick="window.history.back()">
+          &larr; Back
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", function () {
+          const leavingFrom = document
+            .getElementById("leavingfrom")
+            .value.trim();
+          const goingTo = document.getElementById("goingto").value.trim();
+          const travelDate = document.getElementById("traveldate").value;
+          const busType = document.getElementById("busType").value;
+
+          if (!leavingFrom || !goingTo || !travelDate) {
+            alert("Please fill in all fields to search for buses.");
+            return;
+          }
+
+          const queryParams = `?leavingFrom=${encodeURIComponent(
+            leavingFrom
+          )}&goingTo=${encodeURIComponent(
+            goingTo
+          )}&travelDate=${encodeURIComponent(
+            travelDate
+          )}&busType=${encodeURIComponent(busType)}`;
+          window.location.href = "nextpage.html" + queryParams;
+        });
+    </script>
+  </body>
+</html>
