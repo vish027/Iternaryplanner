@@ -3,193 +3,127 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mugilu Travels-Login & Register</title>
+    <title>Travel Planner</title>
     <style>
-      * {
-        box-sizing: border-box;
-      }
-
       body {
-        font-family: "Poppins", sans-serif;
-        background-image: url(bgg.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-size: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         margin: 0;
-      }
-
-      .container {
-        background: rgba(38, 41, 44, 0.5);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        width: 320px;
-        text-align: center;
-      }
-
-      h1 {
-        font-size: 24px;
-        margin-bottom: 25px;
-        color: #ffffff;
-        font-weight: 600;
-      }
-
-      .input-group {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-image: url("lap.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         position: relative;
-        margin-bottom: 20px;
       }
-
-      .input-group i {
+      .header {
+        height: 100px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        color: white;
+      }
+      .header img {
+        height: 80px;
+        margin-right: 20px;
+      }
+      .header h1 {
+        font-size: 24px;
+        margin: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+      .button-container {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #4c8bc9;
+        top: 150px;
+        left: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 20px;
       }
-
-      input {
-        width: 100%;
-        padding: 12px 15px 12px 45px;
-        border: 2px solid #43cea2;
-        border-radius: 25px;
-        font-size: 14px;
-        outline: none;
-        transition: all 0.3s ease;
-      }
-
-      input:focus {
-        border-color: #185a9d;
-      }
-
-      button {
-        width: 100%;
-        padding: 12px;
-        background-color: rgb(188, 124, 60);
+      .button-container button {
+        background-color: #ee7124;
         color: white;
         border: none;
-        border-radius: 25px;
-        cursor: pointer;
+        border-radius: 5px;
+        padding: 15px 30px;
         font-size: 16px;
-        font-weight: 600;
-        transition: background 0.3s ease;
+        margin: 10px 0;
+        cursor: pointer;
+        width: 200px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        position: relative;
       }
-
-      button:hover {
-        background-color: rgb(118, 118, 195);
+      .button-container button:hover {
+        background-color: #2980b9;
       }
-
-      .back-btn {
-        margin-top: 10px;
-        width: 100%;
+      .transport-options {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 220px;
+        background-color: #ee7124;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 10px;
-        background-color: #eb9c2e;
+        z-index: 10;
+      }
+      .transport-options button {
+        background-color: white;
+        color: #ee7124;
+        border: 1px solid #ee7124;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .transport-options button:hover {
+        background-color: #2980b9;
         color: white;
         border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .back-btn:hover {
-        background-color: #76a6f5;
-      }
-
-      .message {
-        margin-top: 20px;
-        font-size: 14px;
-        color: #ffffff;
-      }
-
-      .message a {
-        color: #43cea2;
-        text-decoration: none;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .message a:hover {
-        text-decoration: underline;
-      }
-
-      .register-container {
-        display: none;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="login-container">
-        <h1>Login to Mugilu Travels</h1>
-        <form id="loginForm">
-          <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" required />
-          </div>
-          <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" required />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        <button class="back-btn" onclick="window.location.href='start.html'">Back</button>
-        <p class="message">
-          Not registered? <a onclick="toggleForm()">Create an account</a>
-        </p>
-      </div>
-
-      <div class="register-container">
-        <h1>Create Account</h1>
-        <form id="registerForm">
-          <div class="input-group">
-            <input type="text" placeholder="Username" required />
-          </div>
-          <div class="input-group">
-            <input type="email" placeholder="Email" required />
-          </div>
-          <div class="input-group">
-            <input type="password" placeholder="Password" required />
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        <button class="back-btn" onclick="window.location.href='start.html'">Back</button>
-      </div>
+    <div class="header">
+      <img src="logo.jpeg" alt="Logo" />
     </div>
+
+    <div class="button-container">
+      <div style="position: relative">
+        <button onclick="toggleTransportOptions()">Transport</button>
+        <div class="transport-options" id="transport-options">
+          <button onclick="goToPage('flight.html')">Flight</button>
+          <button onclick="goToPage('Rail.html')">Railway</button> 
+          <button onclick="goToPage('bus.html')">Bus</button> 
+        </div>
+      </div>
+      <button onclick="goToPage('lodging.html')">Lodging</button>
+      <button onclick="goToPage('thingsToDo.html')">Things to Do</button>
+      <button onclick="goToPage('myTrips.html')">My Trips</button>
+      <button onclick="goToPage('support.html')">Support</button>
+    </div>
+
     <script>
-      function toggleForm() {
-        const loginContainer = document.querySelector(".login-container");
-        const registerContainer = document.querySelector(".register-container");
-
-        if (loginContainer.style.display === "none") {
-          loginContainer.style.display = "block";
-          registerContainer.style.display = "none";
-        } else {
-          loginContainer.style.display = "none";
-          registerContainer.style.display = "block";
-        }
+      function toggleTransportOptions() {
+        const transportDiv = document.getElementById("transport-options");
+        transportDiv.style.display =
+          transportDiv.style.display === "none" || !transportDiv.style.display
+            ? "flex"
+            : "none";
       }
 
-      function goBack() {
-        window.history.back();
-      }
-
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          alert("Login successful!");
-        });
-
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          alert("Registration successful!");
-        });
+      function goToPage(page) {
+        window.location.href = page;  }
     </script>
   </body>
 </html>
