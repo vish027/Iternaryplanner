@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Search Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        height: 100vh;
+        background-image: url("flight.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .left-side,
+      .right-side {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .search-container {
+        width: 100%;
+        max-width: 600px;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: rgba(31, 30, 30, 0.6); /* Adjusted opacity */
+      }
+
+      .search-container h1 {
+        margin-bottom: 20px;
+        color: #f5efef;
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .flight-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #f7eded;
+        font-family: 'Times New Roman', Times, serif;
+      }
+
+      .input-group input[type="text"],
+      .input-group input[type="date"],
+      .input-group select,
+      .input-group input[type="number"] {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .checkbox-options {
+        margin-top: 10px;
+        text-align: left;
+      }
+
+      .checkbox-options label {
+        font-size: 0.9em;
+        color: #666;
+      }
+
+      .search-button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #ff7700; /* Changed to orange */
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 119, 0, 0.3);
+        transition: background-color 0.3s ease;
+      }
+
+      .search-button:hover {
+        background-color: #cc5e00;
+      }
+
+      #return-date-box {
+        display: none;
+        margin-top: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      #return-date-box h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: #111111;
+      }
+
+      .back-arrow {
+        margin-top: 20px;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: #f5efef;
+        transition: color 0.3s ease;
+      }
+
+      .back-arrow:hover {
+        color: #ff7700; /* Change color on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Side -->
+      <div class="left-side">
+        <section class="search-container">
+          <h1>Flight Search</h1>
+          <form class="flight-form" action="nextpage.html" method="GET">
+            <div class="input-group">
+              <label>Trip Type</label>
+              <select name="trip-type">
+                <option value="Oneway">One Way</option>
+                <option value="Roundtrip">Round Trip</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Where From</label>
+              <input
+                type="text"
+                name="departure-city"
+                placeholder="Enter departure city"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Where To</label>
+              <input
+                type="text"
+                name="destination-city"
+                placeholder="Enter destination city"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label>Departure Date</label>
+              <input type="date" name="departure-date" required />
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Right Side -->
+      <div class="right-side">
+        <section class="search-container">
+          <div id="return-date-box">
+            <h2>Return Date</h2>
+            <div class="input-group">
+              <input type="date" name="return-date" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Number of Passengers</label>
+            <input type="number" name="Passengers" min="1" required />
+          </div>
+
+          <div class="input-group">
+            <label>Categories</label>
+            <select name="categories">
+              <option value="senior">Senior Citizens (60+ yrs)</option>
+              <option value="adult">Adults (20+ yrs)</option>
+              <option value="child">Children (0-12 yrs)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label>Class</label>
+            <select name="class">
+              <option value="economy">Economy Class</option>
+              <option value="business">Business Class</option>
+              <option value="first">First Class</option>
+              <option value="premium">Premium Economy</option>
+            </select>
+            <button type="submit" class="search-button">Search Flights</button>
+            <div class="back-arrow" onclick="window.history.back()">
+                &larr; Back
+              </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const tripTypeSelect = document.querySelector('select[name="trip-type"]');
+      const returnDateBox = document.getElementById("return-date-box");
+
+      tripTypeSelect.addEventListener("change", function () {
+        if (this.value === "Roundtrip") {
+          returnDateBox.style.display = "block";
+        } else {
+          returnDateBox.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
