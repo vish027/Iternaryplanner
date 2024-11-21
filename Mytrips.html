@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('frd.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background: rgba(17, 3, 3, 0.8);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #ebe3e3;
+        }
+        .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #ff5a5f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #e94e4e;
+        }
+        .history {
+            display: none;
+        }
+        .history ul {
+            list-style: none;
+            padding: 0;
+        }
+        .history li {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        .history img {
+            width: 100px; /* Adjust size */
+            height: 60px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Travel History</h1>
+        <button class="btn" onclick="showHistory()">View Travel History</button>
+
+        <div class="history" id="history">
+            <ul>
+                <li>
+                    <img src="kerala.jpg" alt="kerala">
+                    <strong>Kerala:</strong> Visited on July 4, 2021
+                </li>
+                <li>
+                    <img src="karnataka.png" alt="Karnataka">
+                    <strong>Karnataka:</strong> Visited on May 20, 2023
+                </li>
+                <li>
+                    <img src="newyork.jpg" alt="New York">
+                    <strong>New York, USA:</strong> Visited on September 3, 2022
+                </li>
+                <li>
+                    <img src="Denmark.jpg" alt="Denmark">
+                    <strong>Denmark, Switzerland:</strong> Visited on April 8, 2019
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function showHistory() {
+            const historyDiv = document.getElementById('history');
+            historyDiv.style.display = historyDiv.style.display === 'none' || historyDiv.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
