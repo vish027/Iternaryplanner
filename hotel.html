@@ -65,11 +65,19 @@
       display: none;
     }
 
-    img {
-      width: 100%;
-      border-radius: 8px;
-      margin-top: 15px;
-    }
+    .images-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      
+      .images-container img {
+        width: 48%;
+        border-radius: 8px;
+        margin: 0;
+      }
+      
   </style>
 </head>
 <body>
@@ -104,31 +112,31 @@
     <div id="itineraryDisplay" class="hidden">
       <h2>Your Travel Itinerary</h2>
       <p id="itineraryDetails"></p>
-      <img id="hotelImage" src="Taj-Mahal-Palace.jpg" alt="Hotel Image">
+      <div class="images-container" id="imagesContainer"></div>
     </div>
   </main>
 
   <script>
     const hotelsData = {
       Mumbai: {
-        "Taj Mahal Palace": "Taj-Mahal-Palace.jpg",
-        "The Oberoi": "The_Oberoi.jpg",
-        "ITC Grand Central": "itc.jpg"
+        "Taj Mahal Palace": ["Taj1.jpg", "Taj.jpg"],
+        "The Oberoi": ["The_Oberoi.jpg"],
+        "ITC Grand Central": ["itc.jpg"]
       },
       Delhi: {
-        "The Leela Palace": "https://www.theleela.com/-/media/leela-corporate/homepage/desktop-carousel/the-leela-palace-new-delhi.jpg",
-        "The Imperial": "https://www.theimperialindia.com/images/ImperialHotel.jpg",
-        "Taj Palace": "https://taj.tajhotels.com/content/dam/luxury/hotels/taj-palace-new-delhi/images/Facade1.jpg"
+        "The Leela Palace": ["https://www.theleela.com/-/media/leela-corporate/homepage/desktop-carousel/the-leela-palace-new-delhi.jpg"],
+        "The Imperial": ["https://www.theimperialindia.com/images/ImperialHotel.jpg"],
+        "Taj Palace": ["https://taj.tajhotels.com/content/dam/luxury/hotels/taj-palace-new-delhi/images/Facade1.jpg"]
       },
       Jaipur: {
-        "Rambagh Palace": "https://www.tajhotels.com/content/dam/luxury/rambagh-palace/images/gallery/Rambagh-palace-facade.jpg",
-        "Fairmont Jaipur": "https://www.fairmont.com/assets/0/104/1478/1588/1590/3422/54838e5a-254e-4022-92ff-d96ab1ff2ed2.jpg",
-        "The Oberoi Rajvilas": "https://www.oberoihotels.com/-/media/oberoi-hotels/jaipur/overview/exterior.jpg"
+        "Rambagh Palace": ["https://www.tajhotels.com/content/dam/luxury/rambagh-palace/images/gallery/Rambagh-palace-facade.jpg"],
+        "Fairmont Jaipur": ["https://www.fairmont.com/assets/0/104/1478/1588/1590/3422/54838e5a-254e-4022-92ff-d96ab1ff2ed2.jpg"],
+        "The Oberoi Rajvilas": ["https://www.oberoihotels.com/-/media/oberoi-hotels/jaipur/overview/exterior.jpg"]
       },
       Goa: {
-        "The Leela Goa": "https://www.theleela.com/-/media/leela-corporate/homepage/desktop-carousel/the-leela-goa.jpg",
-        "Taj Exotica": "https://www.tajhotels.com/content/dam/luxury/hotels/taj-exotica-goa/images/Facade.jpg",
-        "Grand Hyatt Goa": "https://www.hyatt.com/content/dam/hyatt/hyattdam/images/2021/11/18/1238/Grand-Hyatt-Goa-P167-Main-Pool.jpg"
+        "The Leela Goa": ["https://www.theleela.com/-/media/leela-corporate/homepage/desktop-carousel/the-leela-goa.jpg"],
+        "Taj Exotica": ["https://www.tajhotels.com/content/dam/luxury/hotels/taj-exotica-goa/images/Facade.jpg"],
+        "Grand Hyatt Goa": ["https://www.hyatt.com/content/dam/hyatt/hyattdam/images/2021/11/18/1238/Grand-Hyatt-Goa-P167-Main-Pool.jpg"]
       }
     };
 
@@ -137,7 +145,7 @@
     const itineraryForm = document.getElementById("itineraryForm");
     const itineraryDisplay = document.getElementById("itineraryDisplay");
     const itineraryDetails = document.getElementById("itineraryDetails");
-    const hotelImage = document.getElementById("hotelImage");
+    const imagesContainer = document.getElementById("imagesContainer");
 
     citySelect.addEventListener("change", () => {
       const selectedCity = citySelect.value;
@@ -168,8 +176,13 @@
         <strong>Check-out Date:</strong> ${checkOutDate}
       `;
 
-      hotelImage.src = hotelsData[city][hotel];
-      hotelImage.alt = `Image of ${hotel}`;
+      imagesContainer.innerHTML = "";
+      hotelsData[city][hotel].forEach(image => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image;
+        imgElement.alt = `Image of ${hotel}`;
+        imagesContainer.appendChild(imgElement);
+      });
 
       itineraryDisplay.classList.remove("hidden");
     });
