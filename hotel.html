@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Itinerary Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('hotel2.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #ece3e3;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #f5f2f1;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #e55341;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .images-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      
+      .images-container img {
+        width: 48%;
+        border-radius: 8px;
+        margin: 0;
+      }
+      
+  </style>
+</head>
+<body>
+  <main>
+    <div class="form-container">
+      <h2>Plan Your Stay</h2>
+      <form id="itineraryForm">
+        <label for="city">Select City:</label>
+        <select id="city" required>
+          <option value="" disabled selected>Choose a city</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Jaipur">Jaipur</option>
+          <option value="Goa">Goa</option>
+        </select>
+
+        <label for="hotels">Select Hotel:</label>
+        <select id="hotels" required>
+          <option value="" disabled selected>Choose a hotel</option>
+        </select>
+
+        <label for="checkIn">Check-in Date:</label>
+        <input type="date" id="checkIn" required>
+
+        <label for="checkOut">Check-out Date:</label>
+        <input type="date" id="checkOut" required>
+
+        <button type="submit">Generate Itinerary</button>
+      </form>
+    </div>
+
+    <div id="itineraryDisplay" class="hidden">
+      <h2>Your Travel Itinerary</h2>
+      <p id="itineraryDetails"></p>
+      <div class="images-container" id="imagesContainer"></div>
+    </div>
+  </main>
+
+  <script>
+    const hotelsData = {
+      Mumbai: {
+        "Taj Mahal Palace": ["Taj1.jpg", "Taj.jpg"],
+        "The Oberoi": ["Oberoi.jpg","oberoi2.jpg"],
+        "ITC Grand Central": ["itc.jpg"]
+      },
+      Delhi: {
+        "The Leela Palace": ["leela.png","leela1.png"],
+        "The Imperial": ["imp.png"],
+        "Taj Palace": ["tajp.png"]
+      },
+      Jaipur: {
+        "Rambagh Palace": ["ram.png"],
+        "Fairmont Jaipur": ["fair.png"],
+        "The Oberoi Rajvilas": ["raj.png"]
+      },
+      Goa: {
+        "The Leela Goa": ["goa.png"],
+        "Taj Exotica": ["goa1.png"],
+        "Grand Hyatt Goa": ["goa2.png","goa3.png"]
+      }
+    };
+
+    const citySelect = document.getElementById("city");
+    const hotelsSelect = document.getElementById("hotels");
+    const itineraryForm = document.getElementById("itineraryForm");
+    const itineraryDisplay = document.getElementById("itineraryDisplay");
+    const itineraryDetails = document.getElementById("itineraryDetails");
+    const imagesContainer = document.getElementById("imagesContainer");
+
+    citySelect.addEventListener("change", () => {
+      const selectedCity = citySelect.value;
+      hotelsSelect.innerHTML = '<option value="" disabled selected>Choose a hotel</option>';
+
+      if (selectedCity && hotelsData[selectedCity]) {
+        for (const hotel in hotelsData[selectedCity]) {
+          const option = document.createElement("option");
+          option.value = hotel;
+          option.textContent = hotel;
+          hotelsSelect.appendChild(option);
+        }
+      }
+    });
+
+    itineraryForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const city = citySelect.value;
+      const hotel = hotelsSelect.value;
+      const checkInDate = document.getElementById("checkIn").value;
+      const checkOutDate = document.getElementById("checkOut").value;
+
+      itineraryDetails.innerHTML = `
+        <strong>City:</strong> ${city} <br>
+        <strong>Hotel:</strong> ${hotel} <br>
+        <strong>Check-in Date:</strong> ${checkInDate} <br>
+        <strong>Check-out Date:</strong> ${checkOutDate}
+      `;
+
+      imagesContainer.innerHTML = "";
+      hotelsData[city][hotel].forEach(image => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image;
+        imgElement.alt = `Image of ${hotel}`;
+        imagesContainer.appendChild(imgElement);
+      });
+
+      itineraryDisplay.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
