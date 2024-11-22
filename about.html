@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Description</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #eee9e9;
+        background: url('about.png') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      h1{
+        text-align: center;
+        font-size:x-large;
+        color:lavender;
+        
+      }
+      .tagline{
+        text-align: center;
+      }
+      .content {
+        flex: 1;
+        max-width: 800px;
+        margin: 20px auto;
+        background: rgb(0, 0, 0, 0.8);
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+      .content h2 {
+        color: #6bdbf2;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 15px;
+        line-height: 1.8;
+      }
+
+      .content ul,
+      .content ol {
+        padding-left: 20px;
+      }
+
+      .content ul li,
+      .content ol li {
+        margin-bottom: 10px;
+      }
+
+      blockquote {
+        font-style: italic;
+        color: #f3efef;
+        margin: 20px 0;
+        padding-left: 10px;
+        border-left: 4px solid #ff5a5f;
+      }
+
+      blockquote cite {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        color: #f3eeee;
+      }
+
+      .cta {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .cta .button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background: #ff5a5f;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .cta .button:hover {
+        background: #ff5a5f;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #da8663;
+        color: white;
+        font-size: 14px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main class="content">
+      <section class="intro">
+            <h1>Mugilu Travels</h1>
+            <p class="tagline">Where your journey meets the clouds</p>
+        <h2>
+          Welcome to Mugilu Travels – Your Gateway to Unforgettable Adventures
+        </h2>
+        <p>
+          At <strong>Mugilu Travels</strong>, we believe that travel is more
+          than just visiting places; its about experiencing life in its most
+          vibrant, thrilling, and awe-inspiring form. Our mission is to connect
+          travelers with the world’s most stunning destinations, inspiring
+          journeys, and unique cultural experiences.
+        </p>
+      </section>
+      <section class="why-choose">
+        <h2>Why Choose Mugilu Travels?</h2>
+        <ul>
+          <li>
+            <strong>Curated Destinations:</strong> Handpicked locations catering
+            to every traveler’s dream.
+          </li>
+          <li>
+            <strong>Seamless Planning:</strong> Simplified booking processes for
+            flights, stays, and tours.
+          </li>
+          <li>
+            <strong>Unbeatable Deals:</strong> Exclusive packages tailored to
+            your budget.
+          </li>
+          <li>
+            <strong>Expert Guidance:</strong> Personalized recommendations to
+            make every journey special.
+          </li>
+        </ul>
+      </section>
+      <section class="services">
+        <h2>Our Services</h2>
+        <ol>
+          <li>
+            <strong>Global Destinations:</strong> Explore over 100+ countries
+            and countless breathtaking locations.
+          </li>
+          <li>
+            <strong>Custom Travel Packages:</strong> Tailored itineraries for
+            every type of traveler.
+          </li>
+          <li>
+            <strong>Adventure & Activities:</strong> Thrilling experiences like
+            trekking, scuba diving, and wildlife safaris.
+          </li>
+          <li>
+            <strong>Group Tours & Corporate Travel:</strong> Hassle-free
+            coordination for groups and businesses.
+          </li>
+          <li>
+            <strong>24/7 Support:</strong> Dedicated customer service for a
+            worry-free experience.
+          </li>
+        </ol>
+      </section>
+      <section class="testimonials">
+        <h2>What Our Travelers Say</h2>
+        <blockquote>
+          "Mugilu Travels turned my bucket list into a reality. Their attention
+          to detail and personal touch made my trip unforgettable!"
+          <cite>– Aarav Gupta, Traveler</cite>
+        </blockquote>
+        <blockquote>
+          "The best travel website Ive ever used. From booking my flight to
+          finding unique local experiences, Mugilu had it all!"
+          <cite>– Sonia, Adventurer</cite>
+        </blockquote>
+      </section>
+
+      <section class="cta">
+        <h2>Ready to Embark on Your Journey?</h2>
+        <p>
+          Start exploring the world with <strong>Mugilu Travels</strong> today.
+          Let us take you places you’ve never dreamed of and create memories
+          that will last a lifetime.
+        </p>
+        <a href="start.html" class="button">Visit Our Website</a>
+        <br><br> <!-- Adds space between the two buttons -->
+        <a href="start.html" class="button">Back</a>
+      </section>
+      
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 Mugilu Travels. All rights reserved.</p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const button = document.querySelector(".cta .button");
+        button.addEventListener("mouseover", function () {
+          button.style.backgroundColor = "#ff7073";
+          button.style.transform = "scale(1.1)";
+        });
+        button.addEventListener("mouseout", function () {
+          button.style.backgroundColor = "#ff5a5f";
+          button.style.transform = "scale(1)";
+        });
+      });
+    </script>
+  </body>
+</html>
