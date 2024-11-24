@@ -60,6 +60,19 @@
       height: auto;
       border-radius: 8px;
     }
+    .back{
+      width: 20%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #ff7700; /* Changed to orange */
+        font-size: 1em;
+        border: none;
+        color:aliceblue;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 119, 0, 0.3);
+        transition: background-color 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -94,9 +107,8 @@
         <img src="can.png" alt="Grand Canyon">
       </div>
     </div>
-
+    <a class="back" href="start.html">Back</a>
   </div>
-
   <script>
     function toggleInfo(infoId) {
       var infoElement = document.getElementById(infoId);
