@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Railway Booking</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+    h1, h2, h3 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .hidden {
+        display: none;
+    }
+    .details, .confirmation {
+        margin-top: 20px;
+        padding: 10px;
+        background: #e6f7ff;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+    }
+
+        /* Include your existing CSS styles */
+    </style>
+</head>
+<body>
+    <div class="container" id="step1">
+        <h1>Railway Booking</h1>
+        <div id="bookingInfo"></div>
+        <button onclick="proceedToNextStep()">Find Trains</button>
+    </div>
+
+    <div class="container hidden" id="step2">
+        <h2>Select a Train</h2>
+        <label for="trainSelect">Available Trains:</label>
+        <select id="trainSelect"></select>
+        <button id="showDetails">Show Details</button>
+        <div class="details hidden" id="trainDetails">
+            <h3>Train Details</h3>
+            <p id="details"></p>
+            <button id="bookTicket">Book Ticket</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="step3">
+        <h2>Booking Confirmation</h2>
+        <div class="confirmation">
+            <h3>Ticket Booked Successfully!</h3>
+            <p id="bookingDetails"></p>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const leavingFrom = urlParams.get('leavingFrom');
+        const goingTo = urlParams.get('goingTo');
+        const travelDate = urlParams.get('travelDate');
+        const trainClass = urlParams.get('trainClass');
+
+        document.getElementById('bookingInfo').innerHTML = `
+            <strong>Booking Details:</strong><br>
+            Leaving From: ${leavingFrom}<br>
+            Going To: ${goingTo}<br>
+            Travel Date: ${travelDate}<br>
+            Train Class: ${trainClass}
+        `;
+
+        function proceedToNextStep() {
+            // Simulate train fetching and move to next step
+            const availableTrains = [
+                { name: "Express 101", source: leavingFrom, destination: goingTo },
+                { name: "Fast Track 202", source: leavingFrom, destination: goingTo }
+            ];
+            const trainSelect = document.getElementById("trainSelect");
+            trainSelect.innerHTML = availableTrains.map(train => <option value="${train.name}">${train.name}</option>).join("");
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.remove("hidden");
+        }
+
+        document.getElementById("showDetails").addEventListener("click", function () {
+            const selectedTrain = document.getElementById("trainSelect").value;
+
+            document.getElementById("details").innerHTML = `
+                Train Name: ${selectedTrain}<br>
+                Source: ${leavingFrom}<br>
+                Destination: ${goingTo}<br>
+                Date: ${travelDate}<br>
+                Class: ${trainClass}
+            `;
+
+            document.getElementById("trainDetails").classList.remove("hidden");
+        });
+
+        document.getElementById("bookTicket").addEventListener("click", function () {
+            document.getElementById("bookingDetails").innerHTML = `
+                Train Name: ${document.getElementById("trainSelect").value}<br>
+                Source: ${leavingFrom}<br>
+                Destination: ${goingTo}<br>
+                Date: ${travelDate}<br>
+                Class: ${trainClass}
+            `;
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("step3").classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
