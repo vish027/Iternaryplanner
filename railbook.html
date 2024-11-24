@@ -114,10 +114,8 @@
                 { name: "Express 101", source: leavingFrom, destination: goingTo },
                 { name: "Fast Track 202", source: leavingFrom, destination: goingTo }
             ];
-
             const trainSelect = document.getElementById("trainSelect");
-            trainSelect.innerHTML = availableTrains.map(train => `<option value="${train.name}">${train.name}</option>`).join("");
-
+            trainSelect.innerHTML = availableTrains.map(train => <option value="${train.name}">${train.name}</option>).join("");
             document.getElementById("step1").classList.add("hidden");
             document.getElementById("step2").classList.remove("hidden");
         }
@@ -150,5 +148,3 @@
     </script>
 </body>
 </html>
-
-        
