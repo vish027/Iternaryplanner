@@ -3,91 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Rail Booking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            width: 100%;
-        }
-        h1, h2, h3 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .hidden {
-            display: none;
-        }
-        .details, .confirmation {
-            margin-top: 20px;
-            padding: 10px;
-            background: #e6f7ff;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-        }
+    <title>Dynamic Railway Booking</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+    h1, h2, h3 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .hidden {
+        display: none;
+    }
+    .details, .confirmation {
+        margin-top: 20px;
+        padding: 10px;
+        background: #e6f7ff;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+    }
+
+        /* Include your existing CSS styles */
     </style>
 </head>
 <body>
     <div class="container" id="step1">
-        <h1>Rail Booking</h1>
-        <form id="railForm">
-            <label for="source">Source:</label>
-            <input type="text" id="source" required>
-
-            <label for="destination">Destination:</label>
-            <input type="text" id="destination" required>
-
-            <label for="date">Date:</label>
-            <input type="date" id="date" required>
-
-            <button type="submit">Find Trains</button>
-        </form>
+        <h1>Railway Booking</h1>
+        <div id="bookingInfo"></div>
+        <button onclick="proceedToNextStep()">Find Trains</button>
     </div>
 
     <div class="container hidden" id="step2">
         <h2>Select a Train</h2>
         <label for="trainSelect">Available Trains:</label>
-        <select id="trainSelect">
-            <!-- Train options will be added dynamically -->
-        </select>
+        <select id="trainSelect"></select>
         <button id="showDetails">Show Details</button>
         <div class="details hidden" id="trainDetails">
             <h3>Train Details</h3>
@@ -105,94 +94,56 @@
     </div>
 
     <script>
-        const form = document.getElementById("railForm");
-        const step1 = document.getElementById("step1");
-        const step2 = document.getElementById("step2");
-        const step3 = document.getElementById("step3");
-        const trainSelect = document.getElementById("trainSelect");
-        const trainDetails = document.getElementById("trainDetails");
-        const details = document.getElementById("details");
-        const bookingDetails = document.getElementById("bookingDetails");
+        const urlParams = new URLSearchParams(window.location.search);
+        const leavingFrom = urlParams.get('leavingFrom');
+        const goingTo = urlParams.get('goingTo');
+        const travelDate = urlParams.get('travelDate');
+        const trainClass = urlParams.get('trainClass');
 
-        let selectedTrain;
-        let selectedDate;
+        document.getElementById('bookingInfo').innerHTML = `
+            <strong>Booking Details:</strong><br>
+            Leaving From: ${leavingFrom}<br>
+            Going To: ${goingTo}<br>
+            Travel Date: ${travelDate}<br>
+            Train Class: ${trainClass}
+        `;
 
-        async function fetchTrainData(source, destination) {
-            // Simulating an API call or dynamic data fetch
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const trains = [
-                        { name: "Train T1", source: "Mumbai", destination: "Pune" },
-                        { name: "Train T2", source: "Delhi", destination: "Agra" },
-                        { name: "Train T3", source: "Bangalore", destination: "Chennai" }
-                    ];
-                    const filteredTrains = trains.filter(
-                        train =>
-                            train.source.toLowerCase() === source.toLowerCase() &&
-                            train.destination.toLowerCase() === destination.toLowerCase()
-                    );
-                    resolve(filteredTrains);
-                }, 1000); // Simulate network delay
-            });
+        function proceedToNextStep() {
+            // Simulate train fetching and move to next step
+            const availableTrains = [
+                { name: "Express 101", source: leavingFrom, destination: goingTo },
+                { name: "Fast Track 202", source: leavingFrom, destination: goingTo }
+            ];
+            const trainSelect = document.getElementById("trainSelect");
+            trainSelect.innerHTML = availableTrains.map(train => <option value="${train.name}">${train.name}</option>).join("");
+            document.getElementById("step1").classList.add("hidden");
+            document.getElementById("step2").classList.remove("hidden");
         }
 
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            // Get source, destination, and date values
-            const source = document.getElementById("source").value;
-            const destination = document.getElementById("destination").value;
-            selectedDate = document.getElementById("date").value;
-
-            // Fetch trains dynamically
-            const availableTrains = await fetchTrainData(source, destination);
-
-            // If trains are available, proceed to next step
-            if (availableTrains.length > 0) {
-                step1.classList.add("hidden");
-                step2.classList.remove("hidden");
-
-                // Populate dropdown with available trains
-                trainSelect.innerHTML = availableTrains
-                    .map(train => `<option value="${train.name}">${train.name}</option>`)
-                    .join("");
-            } else {
-                alert("No trains available for the selected route.");
-            }
-        });
-
         document.getElementById("showDetails").addEventListener("click", function () {
-            selectedTrain = trainSelect.value;
+            const selectedTrain = document.getElementById("trainSelect").value;
 
-            if (selectedTrain) {
-                const train = {
-                    name: selectedTrain,
-                    source: document.getElementById("source").value,
-                    destination: document.getElementById("destination").value
-                };
+            document.getElementById("details").innerHTML = `
+                Train Name: ${selectedTrain}<br>
+                Source: ${leavingFrom}<br>
+                Destination: ${goingTo}<br>
+                Date: ${travelDate}<br>
+                Class: ${trainClass}
+            `;
 
-                // Display train details
-                details.innerHTML = `
-                    Train Name: ${train.name}<br>
-                    Source: ${train.source}<br>
-                    Destination: ${train.destination}<br>
-                    Date: ${selectedDate}
-                `;
-                trainDetails.classList.remove("hidden");
-            }
+            document.getElementById("trainDetails").classList.remove("hidden");
         });
 
         document.getElementById("bookTicket").addEventListener("click", function () {
-            // Display booking confirmation
-            bookingDetails.innerHTML = `
-                <strong>Booking Details:</strong><br>
-                Train Name: ${selectedTrain}<br>
-                Source: ${document.getElementById("source").value}<br>
-                Destination: ${document.getElementById("destination").value}<br>
-                Date: ${selectedDate}
+            document.getElementById("bookingDetails").innerHTML = `
+                Train Name: ${document.getElementById("trainSelect").value}<br>
+                Source: ${leavingFrom}<br>
+                Destination: ${goingTo}<br>
+                Date: ${travelDate}<br>
+                Class: ${trainClass}
             `;
-            step2.classList.add("hidden");
-            step3.classList.remove("hidden");
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("step3").classList.remove("hidden");
         });
     </script>
 </body>
