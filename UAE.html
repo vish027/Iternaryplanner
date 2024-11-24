@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Attractions in UAE</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      padding: 40px 20px;
+    }
+    .attraction {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .attraction .text {
+      width: 45%;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .attraction .text h2 {
+      color: #2c3e50;
+      font-size: 2rem;
+    }
+    .attraction .text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    .attraction .image {
+      width: 45%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .attraction .image img {
+      width: 75%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Top Attractions in the UAE</h1>
+    <div class="attraction">
+      <div class="text">
+        <h2>Burj Khalifa, Dubai</h2>
+        <p>Burj Khalifa is the tallest building in the world, standing at an awe-inspiring height of 828 meters. Located in the heart of Dubai, the skyscraper features a variety of luxurious experiences, including observation decks offering breathtaking panoramic views of the city. Visitors can enjoy views of the vast deserts, pristine beaches, and the Dubai Marina from the 124th and 148th floors.</p>
+        <p>With its unique design, Burj Khalifa stands as a symbol of modern architecture and Dubai’s rapid growth and innovation. It is one of the most photographed structures in the world and a must-see for anyone visiting Dubai.</p>
+      </div>
+      <div class="image">
+        <img src="kalifa.jpg" alt="Burj Khalifa">
+      </div>
+    </div>
+
+    <div class="attraction">
+      <div class="text">
+        <h2>Sheikh Zayed Grand Mosque, Abu Dhabi</h2>
+        <p>The Sheikh Zayed Grand Mosque is one of the largest mosques in the world and a breathtaking example of Islamic architecture. Located in Abu Dhabi, the mosque can accommodate over 40,000 worshippers. It features a mix of Islamic, Moorish, and modern designs, with stunning white marble, large domes, and intricate artwork.</p>
+        <p>Inside, the mosque houses the world’s largest hand-knotted carpet and several massive chandeliers. It is not only a place of worship but also an architectural marvel and a cultural symbol of the UAE. Visitors can enjoy guided tours and learn about Islamic traditions and the history of the mosque.</p>
+      </div>
+      <div class="image">
+        <img src="mosque.png" alt="Sheikh Zayed Grand Mosque">
+      </div>
+    </div>
+
+  </div>
+  <script>
+    function toggleInfo(infoId) {
+      var infoElement = document.getElementById(infoId);
+      if (infoElement.style.display === 'none' || infoElement.style.display === '') {
+        infoElement.style.display = 'block';
+      } else {
+        infoElement.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
