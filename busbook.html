@@ -154,7 +154,7 @@
 
                 // Populate dropdown with available buses
                 busSelect.innerHTML = availableBuses
-                    .map(bus => `<option value="${bus.name}">${bus.name}</option>`)
+                    .map(bus => <option value="${bus.name}">${bus.name}</option>)
                     .join("");
             } else {
                 alert("No buses available for the selected route.");
