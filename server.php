@@ -58,7 +58,7 @@ $result = $conn->query($sql);
             letter-spacing: 0.03em;
         }
 
-       }
+       
     </style>
 </head>
 
