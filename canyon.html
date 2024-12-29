@@ -1,0 +1,103 @@
+`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canyon Information</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #2b2626;
+        background-image: url('k.png');
+        background-repeat: no-repeat; /* Prevents repetition */
+        background-size: cover; /* Ensures the image covers the entire background */
+        background-position: center; /* Centers the image */
+      }
+      .canyon-box {
+        width: 400px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #272121;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        text-align: center;
+      }
+      .canyon-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+      .canyon-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .canyon-content {
+        padding: 16px;
+      }
+      .canyon-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #ead8d8;
+      }
+      .rating .fa-star {
+        color: #ddd;
+      }
+      .rating .fa-star.checked {
+        color: gold;
+      }
+      .description {
+        font-size: 16px;
+        color: #eae7e7;
+        margin-top: 12px;
+        line-height: 1.6;
+        text-align: justify;
+      }
+      .read-more {
+        display: inline-block;
+        margin-top: 16px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .read-more:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canyon-box">
+      <img class="canyon-image" src="canyon.jpg" alt="Grand Canyon" />
+      <div class="canyon-content">
+        <p class="canyon-title">Grand Canyon</p>
+        <p class="description">
+          The Grand Canyon is one of the most iconic natural wonders of the
+          world. Located in Arizona, USA, it stretches for over 277 miles (446
+          kilometers) and is up to 18 miles (29 kilometers) wide. Known for its
+          breathtaking vistas, steep red rock walls, and the Colorado River
+          flowing through it, the Grand Canyon has been carved by millions of
+          years of geological activity. Visitors can explore its beauty through
+          hiking trails, helicopter tours, rafting adventures, and panoramic
+          viewpoints like the South Rim and the North Rim. With over six million
+          visitors annually, the Grand Canyon is a testament to the raw power of
+          nature and its ability to create awe-inspiring landscapes.
+        </p>
+        <a class="read-more" href="https://en.wikipedia.org/wiki/Grand_Canyon">Read More</a>
+        <a class="read-more" href="start.html">Back</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,157 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bus Booking Page</title>
+    <title>Search Train Availability</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e4d8d6;
+            background-image: url('railwayy.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #e4d8d6;
-    background-image: url('railwayy.jpg'); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-}
+        .container {
+            max-width: 600px; 
+            margin: 20px auto;
+            background: rgba(17, 3, 3, 0.6); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px; 
+            text-align: center;
+            color: #ccc;
+            width: 100%; 
+            max-height: 600px; 
+            overflow: auto; 
+        }
 
-.container {
-    max-width: 600px; 
-    margin: 20px auto;
-    background: rgba(17, 3, 3, 0.6); 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 15px; 
-    text-align: center;
-    color: #ccc;
-    width: 100%; 
-    max-height: 600px; 
-    overflow: auto; 
-}
+        .search-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; 
+        }
 
-.search-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; 
-}
+        .search-section label {
+            font-weight: bold;
+            font-size: 14px; 
+        }
 
-.search-section label {
-    font-weight: bold;
-    font-size: 14px; 
-}
+        .search-section input,
+        .search-section select,
+        .search-section button {
+            padding: 8px 12px; 
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%; 
+            box-sizing: border-box; 
+            background: rgba(0, 0, 0, 0.4); 
+            color: white; 
+        }
 
-.search-section input,
-.search-section select,
-.search-section button {
-    padding: 8px 12px; 
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%; 
-    box-sizing: border-box; 
-    background: rgba(0, 0, 0, 0.4); 
-    color: white; 
-}
+        .search-section button {
+            background-color: rgba(255, 90, 95, 0.7); 
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(255, 90, 95, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%; 
+        }
 
-.search-section select {
-    background-color: rgba(0, 0, 0, 0.4); 
-    color: white; 
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%; 
-}
+        .search-section button:hover {
+            background-color: rgba(233, 78, 78, 0.9); 
+        }
 
-.search-section select:focus {
-    background-color: white; 
-    color: black;
-}
+        .search-section input::placeholder {
+            color: white;
+            opacity: 0.5; 
+        }
 
-.search-section button {
-    background-color: rgba(255, 90, 95, 0.7); 
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(255, 90, 95, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; 
-}
+        .back-arrow {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
 
-.search-section button:hover {
-    background-color: rgba(233, 78, 78, 0.9); 
-}
+        .back-arrow:hover {
+            color: rgba(255, 90, 95, 0.7); 
+        }
 
-.search-section input::placeholder {
-    color: white;
-    opacity: 0.5; 
-}
-
-
-.back-arrow {
-    margin-top: 20px;
-    font-size: 1.5em;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.back-arrow:hover {
-    color: rgba(255, 90, 95, 0.7); 
-}
-input[type="date"]::-webkit-calendar-picker-indicator {
-    background-color: white; 
-    color: black; 
-    border: none; }
-
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background-color: white; 
+            color: black; 
+            border: none; 
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Search train availability</h2>
+        <h2>Search Train Availability</h2>
         <div class="search-section">
             <label for="leavingfrom">Leaving From</label>
-            <input type="text" id="leavingfrom" name="leavingfrom" placeholder="Enter departure city" />
+            <input type="text" id="leavingfrom" name="leavingfrom" placeholder="Enter departure city" required />
 
             <label for="goingto">Going To</label>
-            <input type="text" id="goingto" name="goingto" placeholder="Enter destination city" />
+            <input type="text" id="goingto" name="goingto" placeholder="Enter destination city" required />
 
             <label for="traveldate">Travel Date</label>
-            <input type="date" id="traveldate" name="traveldate" />
+            <input type="date" id="traveldate" name="traveldate" required />
 
-            <label for="trainclass">Train class</label>
-            <select id="trainclass" name="trainclass">
+            <label for="trainclass">Train Class</label>
+            <select id="trainclass" name="trainclass" required>
                 <option value="1st AC">1st AC</option>
-                <option value="sleeper">Sleeper</option>
-                <option value="third AC">Third AC</option>
-                <option value="second AC">Second AC</option>
-                <option value="firstclass">First class</option>
-                <option value="general">General</option>
+                <option value="Sleeper">Sleeper</option>
+                <option value="Third AC">Third AC</option>
+                <option value="Second AC">Second AC</option>
+                <option value="First Class">First Class</option>
+                <option value="General">General</option>
             </select>
-            <button id="searchButton">Search</button>
-            <div class="back-arrow" onclick="window.history.back()">
-                &larr; Back
-            </div>
+            <button id="searchButton">Search Train</button>
+            <button onclick="location.href='transport.html'">Back</button>
         </div>
     </div>
+
     <script>
         document.getElementById('searchButton').addEventListener('click', function() {
-            const leavingFrom = document.getElementById('leavingfrom').value;
-            const goingTo = document.getElementById('goingto').value;
-            const travelDate = document.getElementById('traveldate').value;
+            const leavingFrom = document.getElementById('leavingfrom').value.trim();
+            const goingTo = document.getElementById('goingto').value.trim();
+            const travelDate = document.getElementById('traveldate').value.trim();
             const trainClass = document.getElementById('trainclass').value;
-    
+
+            // Check if any of the required fields are empty
             if (!leavingFrom || !goingTo || !travelDate) {
                 alert('Please fill in all required fields.');
                 return;
             }
-    
-            alert(`Searching for trains:\nLeaving From: ${leavingFrom}\nGoing To: ${goingTo}\nTravel Date: ${travelDate}\nTrain Class: ${trainClass}`);
-            
-            window.location.href="nextpage.html"
+
+            // Construct the URL with the query parameters
+            const url = `Railbook.html?leavingFrom=${encodeURIComponent(leavingFrom)}&goingTo=${encodeURIComponent(goingTo)}&travelDate=${encodeURIComponent(travelDate)}&trainClass=${encodeURIComponent(trainClass)}`;
+
+            // Redirect to the next page with query parameters
+            window.location.href = url;
         });
     </script>
 </body>

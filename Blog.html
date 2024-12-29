@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mugilu Travels - Blog</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            line-height: 1.6;
+            color: #eee9e9;
+            background: url('blog.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+          }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 36px;
+        text-align: center;
+      }
+
+      .blog-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .blog-post {
+        margin-bottom: 20px;
+      }
+
+      .blog-post h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .blog-post p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .blog-post img {
+        width: 50%;
+        height: auto;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+
+      .read-more {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 14px;
+      }
+      .search-button{
+        width: 20%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #ff7700; /* Changed to orange */
+        font-size: 1em;
+        border: none;
+        color:aliceblue;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 119, 0, 0.3);
+        transition: background-color 0.3s ease;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="blog-container">
+      <h1>Mugilu Travels-Blog</h1>
+      <div class="blog-post">
+        <h2>Mumbai-City of Dreams</h2>
+        <p><em>Posted on January 15, 2024</em></p>
+        <img src="mumbai.png" alt="Mumbai" />
+        <p>
+          Mumbai is the epicenter of Bollywood, India's thriving film industry,
+          making it a global entertainment hotspot. Mumbai's population is
+          incredibly diverse, with people from across India and the world
+          calling it home. This diversity is reflected in its cuisine,
+          festivals, and languages.
+        </p>
+      </div>
+
+      <div class="blog-post">
+        <h2>jaipur-The Pink city</h2>
+        <p><em>Posted on January 12, 2024</em></p>
+        <img src="jaipur.png" alt="jaipur" />
+        <p>
+          Jaipur, known as the "Pink City," is the capital of the Indian state
+          of Rajasthan and one of India's most captivating cities. Famous for
+          its rich history, stunning architecture, and vibrant culture, Jaipur
+          is a key destination in India’s Golden Triangle tourist circuit.
+        </p>
+      </div>
+
+      <div class="blog-post">
+        <h2>Goa-the land of Beaches</h2>
+        <p><em>Posted on January 10, 2024</em></p>
+        <img src="goaa.png" alt="goa" />
+        <p>
+          Goa, India’s smallest state by area, is a tropical paradise known for
+          its stunning beaches. Goas culture is a unique blend of Indian and
+          Portuguese traditions, reflected in its festivals, and lifestyle.
+        </p>
+      </div>
+
+      <div class="blog-post">
+        <h2>Delhi-the capital city of india</h2>
+        <p><em>Posted on January 10, 2024</em></p>
+        <img src="delhi.png" alt="Delhi" />
+        <p>
+          Delhi, the capital city of India, is a vibrant metropolis that blends
+          ancient heritage with modern dynamism. Delhi has been the seat of
+          power for various rulers throughout history,contributing to its rich
+          cultural and architectural heritage.
+        </p>
+      </div>
+      <button type="button" onclick="location.href='start.html'" class="search-button">Back</button>
+    </div>
+
+    <footer>
+      <p>© 2024 Mugilu Travels. All rights reserved.</p>
+    </footer>
+    <script>
+      document.querySelectorAll(".read-more-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = button.nextElementSibling;
+
+          if (content.style.display === "block") {
+            content.style.display = "none";
+            button.textContent = "Read More";
+          } else {
+            content.style.display = "block";
+            button.textContent = "Read Less";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Bus Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .details, .confirmation {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e6f7ff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="step1">
+        <h1>Bus Booking</h1>
+        <form id="busForm">
+            <label for="source">Source:</label>
+            <input type="text" id="source" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <button type="submit">Find Buses</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="step2">
+        <h2>Select a Bus</h2>
+        <label for="busSelect">Available Buses:</label>
+        <select id="busSelect">
+            <!-- Bus options will be added dynamically -->
+        </select>
+        <button id="showDetails">Show Details</button>
+        <div class="details hidden" id="busDetails">
+            <h3>Bus Details</h3>
+            <p id="details"></p>
+            <button id="bookTicket">Book Ticket</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="step3">
+        <h2>Booking Confirmation</h2>
+        <div class="confirmation">
+            <h3>Ticket Booked Successfully!</h3>
+            <p id="bookingDetails"></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("busForm");
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+        const busSelect = document.getElementById("busSelect");
+        const busDetails = document.getElementById("busDetails");
+        const details = document.getElementById("details");
+        const bookingDetails = document.getElementById("bookingDetails");
+
+        let selectedBus;
+        let selectedDate;
+
+        async function fetchBusData(source, destination) {
+            // Simulating an API call or dynamic data fetch
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const buses = [
+                        { name: "Bus A1", source: "Mumbai", destination: "Pune" },
+                        { name: "Bus B2", source: "Delhi", destination: "Agra" },
+                        { name: "Bus C3", source: "Bangalore", destination: "Chennai" }
+                    ];
+                    const filteredBuses = buses.filter(
+                        bus =>
+                            bus.source.toLowerCase() === source.toLowerCase() &&
+                            bus.destination.toLowerCase() === destination.toLowerCase()
+                    );
+                    resolve(filteredBuses);
+                }, 1000); // Simulate network delay
+            });
+        }
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            // Get source, destination, and date values
+            const source = document.getElementById("source").value;
+            const destination = document.getElementById("destination").value;
+            selectedDate = document.getElementById("date").value;
+
+            // Fetch buses dynamically
+            const availableBuses = await fetchBusData(source, destination);
+
+            // If buses are available, proceed to next step
+            if (availableBuses.length > 0) {
+                step1.classList.add("hidden");
+                step2.classList.remove("hidden");
+
+                // Populate dropdown with available buses
+                busSelect.innerHTML = availableBuses
+                    .map(bus => <option value="${bus.name}">${bus.name}</option>)
+                    .join("");
+            } else {
+                alert("No buses available for the selected route.");
+            }
+        });
+
+        document.getElementById("showDetails").addEventListener("click", function () {
+            selectedBus = busSelect.value;
+
+            if (selectedBus) {
+                const bus = {
+                    name: selectedBus,
+                    source: document.getElementById("source").value,
+                    destination: document.getElementById("destination").value
+                };
+
+                // Display bus details
+                details.innerHTML = `
+                    Bus Name: ${bus.name}<br>
+                    Source: ${bus.source}<br>
+                    Destination: ${bus.destination}<br>
+                    Date: ${selectedDate}
+                `;
+                busDetails.classList.remove("hidden");
+            }
+        });
+
+        document.getElementById("bookTicket").addEventListener("click", function () {
+            // Display booking confirmation
+            bookingDetails.innerHTML = `
+                <strong>Booking Details:</strong><br>
+                Bus Name: ${selectedBus}<br>
+                Source: ${document.getElementById("source").value}<br>
+                Destination: ${document.getElementById("destination").value}<br>
+                Date: ${selectedDate}
+            `;
+            step2.classList.add("hidden");
+            step3.classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>

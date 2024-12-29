@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Attractions in the USA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      background-image: url('usab.png');
+      
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+    }
+    
+    .container {
+      padding: 40px 20px;
+    }
+    .attraction {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+    .attraction .text {
+      width: 45%;
+      padding: 20px;
+      background-color: #221c1c;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+    }
+    .attraction .text h2 {
+      color: #d61d1d;
+      font-size: 2rem;
+    }
+    .attraction .text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #f9eded;
+    }
+    .attraction .image {
+      width: 45%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .attraction .image img {
+      width: 65%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .back{
+      width: 20%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #ff7700; /* Changed to orange */
+        font-size: 1em;
+        border: none;
+        color:aliceblue;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(255, 119, 0, 0.3);
+        transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Top Attractions in the USA</h1>
+    
+    <!-- Statue of Liberty -->
+    <div class="attraction" onclick="toggleInfo('statue-info')">
+      <div class="text">
+        <h2>Statue of Liberty</h2>
+        <p>The Statue of Liberty is one of the most recognizable symbols of freedom and democracy in the world.
+             Located on Liberty Island in New York Harbor, it was gifted to the United States by France in 1886. Standing at 151 feet tall (93 meters), 
+             the statue holds a torchabove the city, welcoming immigrants arriving by sea. 
+             It is a UNESCO World Heritage Site and attracts millions of visitors every year.</p>
+      </div>
+      <div class="image">
+        <img src="lib.png" alt="Statue of Liberty">
+      </div>
+    </div>
+
+    <!-- Grand Canyon -->
+    <div class="attraction" onclick="toggleInfo('canyon-info')">
+      <div class="text">
+        <h2>Grand Canyon</h2>
+        <p>The Grand Canyon is one of the most famous natural wonders in the world, located in the state of Arizona. 
+            This vast and breathtaking canyon is carved by the Colorado River and stretches for over 277 miles (446 kilometers). It reaches depths of over a mile and 
+            showcases a stunning array of rock formations. It is a UNESCO World Heritage Site and attracts millions of visitors each year 
+            for hiking, sightseeing, and rafting.</p>
+      </div>
+      <div class="image">
+        <img src="can.png" alt="Grand Canyon">
+      </div>
+    </div>
+    <a class="back" href="start.html">Back</a>
+  </div>
+  <script>
+    function toggleInfo(infoId) {
+      var infoElement = document.getElementById(infoId);
+      if (infoElement.style.display === 'none' || infoElement.style.display === '') {
+        infoElement.style.display = 'block';
+      } else {
+        infoElement.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>

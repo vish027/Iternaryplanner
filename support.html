@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive India Travel Chatbot</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .chat-container {
+        width: 380px;
+        height: 500px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-box {
+        flex: 1;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        font-size: 14px;
+        box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .user-msg,
+      .bot-msg {
+        padding: 8px 15px;
+        margin: 5px 0;
+        border-radius: 15px;
+        max-width: 75%;
+        word-wrap: break-word;
+      }
+
+      .user-msg {
+        background-color: #c7e8a7;
+        align-self: flex-end;
+      }
+
+      .bot-msg {
+        background-color: #ececec;
+        align-self: flex-start;
+      }
+
+      .input-area {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        margin-right: 10px;
+      }
+
+      .send-btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+
+      .send-btn:hover {
+        background-color: #45a049;
+      }
+
+      .send-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-box" id="chat-box"></div>
+      <div class="input-area">
+        <input
+          type="text"
+          id="user-input"
+          class="user-input"
+          placeholder="Ask..."
+          autofocus
+        />
+        <button id="send-btn" class="send-btn">Send</button>
+        <button onclick="location.href='transport.html'" class="send-btn">Back</button>
+      </div>
+    </div>
+
+    <script>
+      // Data for chatbot responses
+      const responses = [
+        { question: "india", answer: "India is a vast country located in South Asia." },
+        {
+          question: "bengaluru",
+          answer:
+            "The capital of Karnataka is Bengaluru (Bangalore), a bustling city known for its tech industry. Key tourist places in Bengaluru include the Bangalore Palace, Lalbagh Botanical Garden, and Cubbon Park. The Vidhana Soudha is a magnificent legislative building worth visiting. Nandi Hills offers scenic views and a peaceful escape. Bannerghatta National Park is another must-visit for nature lovers and wildlife enthusiasts.",
+        },
+        {
+          question: "delhi",
+          answer:
+            "Delhi, the capital of India, is a vibrant blend of ancient history and modernity, offering a variety of attractions for every kind of traveler.",
+        },
+        {
+          question: "mysore",
+          answer:
+            "Mysore is famous for the Mysore Palace. Mysore is a beautiful city located in the southern part of India in the state of Karnataka. It is renowned for its rich history, cultural heritage, royal palaces, and beautiful gardens. A tour of Mysore offers a perfect blend of royal grandeur, ancient architecture, spiritual sites, and nature.",
+        },
+        {
+          question: "kerala",
+          answer:
+            "Kerala offers a unique blend of natural beauty, history, and traditional Indian culture, making it a sought-after destination for travelers. Kerala is known for its backwaters.",
+        },
+        {
+          question: "dharmasthala",
+          answer:
+            "Dharmasthala is a popular pilgrimage town in Karnataka, known for the Sri Manjunatha Temple, dedicated to Lord Shiva. It attracts thousands of devotees every year due to its religious significance and serene atmosphere. Nearby, Sultan Bathery offers historical ruins and scenic views, while Kudremukh National Park is ideal for nature lovers and trekking.",
+        },
+        {
+          question: "ujire",
+          answer:
+            "Ujire is a scenic town in the Dakshina Kannada district of Karnataka, known for its proximity to the revered Dharmasthala temple and lush green surroundings.",
+        },
+        {
+            question: "distance between ujire to dharmasthala",
+            answer:
+              "Ujire is a scenic town in the Dakshina Kannada district of Karnataka, known for its proximity to the revered Dharmasthala temple and lush green surroundings. The distance between Ujire and Dharmasthala is approximately 5 kilometers by road. The drive typically takes around 10–15 minutes, depending on traffic conditions.",
+          },
+        {
+          question: "hotels dharmasthala",
+          answer:
+            "Hotels in Dharmasthala offer a range of facilities to cater to pilgrims and tourists. Many provide basic amenities like comfortable rooms, vegetarian dining, and free Wi-Fi. Some hotels feature spiritual services, such as temple shuttle services and prayer halls. Parking is usually available for visitors. A few hotels also offer tour guide services for exploring nearby attractions.",
+        },
+      ];
+
+      // DOM Elements
+      const chatBox = document.getElementById("chat-box");
+      const userInput = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+
+      // Function to add messages to the chat box
+      function addMessage(message, sender) {
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add(sender === "user" ? "user-msg" : "bot-msg");
+        msgDiv.textContent = message;
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+      }
+
+      // Function to simulate typing effect
+      function typeMessage(msgDiv, message, index = 0) {
+        if (index < message.length) {
+          msgDiv.textContent += message.charAt(index);
+          setTimeout(() => typeMessage(msgDiv, message, index + 1), 50);
+        }
+      }
+
+      // Function to get bot response with typing effect
+      function getBotResponse(userQuestion) {
+        const responseObj = responses.find(
+          (response) =>
+            response.question.toLowerCase() === userQuestion.toLowerCase()
+        );
+
+        const response =
+          responseObj ? responseObj.answer : "Sorry, I didn't understand that.";
+        
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("bot-msg"); // Empty div initially
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+
+        typeMessage(msgDiv, response); // Type the message letter by letter
+      }
+
+      // Send button click event
+      sendBtn.addEventListener("click", function () {
+        const userMessage = userInput.value.trim().toLowerCase();
+        if (userMessage) {
+          addMessage(userMessage, "user"); // Show user message immediately
+          getBotResponse(userMessage); // Get bot response after a slight delay
+          userInput.value = ""; // Clear input field
+        }
+      });
+
+      // Enter key press event
+      userInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          sendBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>

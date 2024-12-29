@@ -15,7 +15,6 @@
         background-position: center; /* Centers the image */
         background-attachment: fixed; /* Keeps the image fixed when scrolling */
       }
-
       .container {
         max-width: 600px;
         margin: 40px auto;
@@ -26,7 +25,6 @@
         text-align: center;
         color: #fff;
       }
-
       .search-section {
         display: flex;
         flex-direction: column;
@@ -120,10 +118,7 @@
         </select>
         <button id="searchButton">Search Buses</button>
 
-        <!-- Back arrow button -->
-        <div class="back-arrow" onclick="window.history.back()">
-          &larr; Back
-        </div>
+        <button onclick="location.href='transport.html'">Back</button>
       </div>
     </div>
 
@@ -150,7 +145,7 @@
           )}&travelDate=${encodeURIComponent(
             travelDate
           )}&busType=${encodeURIComponent(busType)}`;
-          window.location.href = "nextpage.html" + queryParams;
+          window.location.href = "busbook.html" + queryParams;
         });
     </script>
   </body>
